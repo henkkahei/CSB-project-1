@@ -1,8 +1,12 @@
+<title>Polls</title>
+
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
 <body></body>
+
+<a href="{% url 'home' %}">To home page</a>
 
 {% if latest_question_list %}
     <ul>

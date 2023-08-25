@@ -1,3 +1,5 @@
+<title>Results</title>
+
 <body></body>
 
 <h1>{{ question.question_text }}</h1>
@@ -7,5 +9,7 @@
     <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
 {% endfor %}
 </ul>
+
+<a href="{% url 'polls:index' %}">To polls page</a>
 
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>

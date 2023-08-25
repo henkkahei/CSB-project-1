@@ -16,12 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic.base import TemplateView
+
 from . import settings
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
         path("polls/", include("polls.urls")),
+        path('login/', LoginView.as_view(template_name='polls/login.html')),
+    	path('logout/', LogoutView.as_view(), name='logout'),
         path('admin/', admin.site.urls),
+        path("accounts/", include("django.contrib.auth.urls")),
         path("__debug__/", include("debug_toolbar.urls")),
+        path('', TemplateView.as_view(template_name='home.html'), name='home'),
     ]

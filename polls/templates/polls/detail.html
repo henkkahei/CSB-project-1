@@ -1,3 +1,5 @@
+<title>{{ question.question_text }}</title>
+
 <body></body>
 <!-- Since we’re creating a POST form (which can have the effect of modifying data),
     we need to worry about Cross Site Request Forgeries.
@@ -5,6 +7,8 @@
     because Django comes with a helpful system for protecting against it.
     In short, all POST forms that are targeted at internal URLs
     should use the {% csrf_token %} template tag. -->
+
+{% if user.is_authenticated %}
 
 <form action="{% url 'polls:vote' question.id %}" method="post">
     {% csrf_token %}
@@ -18,3 +22,7 @@
     </fieldset>
     <input type="submit" value="Vote">
     </form>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
