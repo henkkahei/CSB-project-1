@@ -8,6 +8,13 @@
 
 <a href="{% url 'home' %}">To home page</a>
 
+<form method="GET">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Log in</button>
+</form>
+
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}

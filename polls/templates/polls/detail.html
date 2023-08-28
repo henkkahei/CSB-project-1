@@ -23,6 +23,6 @@
     <input type="submit" value="Vote">
     </form>
 {% else %}
-  <p>You are not logged in</p>
+  <p>You have to be logged in to vote</p>
   <a href="{% url 'login' %}">Log In</a>
 {% endif %}
