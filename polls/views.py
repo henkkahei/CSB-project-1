@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,6 +8,8 @@ from django.db.models import F
 from django.views import generic
 from django.utils import timezone
 # from django.template import loader
+
+import sqlite3
 
 from .models import Question, Choice
 
@@ -63,3 +67,23 @@ def vote(request, qid):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+# malicious query in search: "s%' UNION SELECT password FROM auth_user WHERE is_superuser=1--"
+
+class SearchView(generic.ListView):
+    model = Question
+    template_name = "polls/search.html"
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        object_list = Question.objects.filter(question_text__icontains=query)
+
+        conn = sqlite3.connect('db.sqlite3')
+        cursor = conn.cursor()
+
+        q = "SELECT question_text FROM polls_question WHERE question_text LIKE '%" + query + "%'"
+
+        response = cursor.execute(q).fetchall()
+
+        return response
+        return object_list

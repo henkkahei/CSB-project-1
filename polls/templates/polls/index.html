@@ -24,3 +24,8 @@
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+<form action="{% url 'polls:search' %}" method="get">
+    <input name="q" type="text" placeholder="Search...">
+    <button type="submit">Search</button>
+</form>
