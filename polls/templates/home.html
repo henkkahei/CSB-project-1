@@ -9,9 +9,7 @@
     {% csrf_token %}
     <input type="submit" value="Logout"/>
   </form>
-  <form action='polls/' method="GET">
-    <input type="submit" value="To polls"/>
-  </form>
+  <a href="{% url 'polls:index' %}">To polls</a>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">Log In</a>

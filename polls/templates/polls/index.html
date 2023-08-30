@@ -25,7 +25,21 @@
     <p>No polls are available.</p>
 {% endif %}
 
+<!-- Fix for search functionality provided below this form-->
 <form action="{% url 'polls:search' %}" method="get">
     <input name="q" type="text" placeholder="Search...">
     <button type="submit">Search</button>
 </form>
+
+<!-- Fix for search functionality, don't comment out this line-->
+<!-- <form class="d-flex" role="search" method="POST" action="{% url 'polls:search' %}">
+    {% csrf_token %}
+    <input
+       class="form-control me-2"
+       type="search"
+       placeholder="Search..."
+       name="q"
+       required aria-label="Search"
+    >
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form> -->

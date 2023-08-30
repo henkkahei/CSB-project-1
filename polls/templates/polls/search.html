@@ -7,3 +7,24 @@
     </li>
   {% endfor %}
 </ul>
+
+<!-- Fix for search functionality, don't comment out this line-->
+<!-- {% if query %}
+    <div>
+        <div>
+        {% if questions %}
+            {% for question in questions %}
+                <div>
+                    <p>{{question}}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3>No search results found</h3>
+        {% endif %}
+        </div>
+    </div>
+{% else %}
+    <h1>Please enter a search query</h1>
+{% endif %}
+
+<a href="{% url 'polls:index' %}">To polls</a> -->

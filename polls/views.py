@@ -76,7 +76,6 @@ class SearchView(generic.ListView):
 
     def get_queryset(self):
         query = self.request.GET.get("q")
-        object_list = Question.objects.filter(question_text__icontains=query)
 
         conn = sqlite3.connect('db.sqlite3')
         cursor = conn.cursor()
@@ -86,4 +85,13 @@ class SearchView(generic.ListView):
         response = cursor.execute(q).fetchall()
 
         return response
-        return object_list
+    
+# def search_feature(request):
+#     """Fix for search functionality"""
+#     if request.method == 'POST':
+#         search_query = request.POST['q']
+#         # Filter your model by the search query
+#         questions = Question.objects.filter(question_text__contains=search_query)
+#         return render(request, 'polls/search.html', {'query':search_query, 'questions':questions})
+#     else:
+#         return render(request, 'polls/index.html',{})
