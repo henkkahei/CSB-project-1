@@ -25,7 +25,7 @@ if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
         path("polls/", include("polls.urls")),
-        path('login/', LoginView.as_view(template_name='polls/login.html')),
+        path('login/', LoginView.as_view(template_name='registration/login.html')),
     	path('logout/', LogoutView.as_view(), name='logout'),
         path('admin/', admin.site.urls),
         path("accounts/", include("django.contrib.auth.urls")),
