@@ -3,6 +3,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import F
 from django.views import generic
@@ -23,8 +24,7 @@ class IndexView(generic.ListView):
         """
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
 
-
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
 
@@ -38,6 +38,7 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = "polls/results.html"
 
+@login_required()
 def vote(request, qid):
     # Small problem here. Function first gets the selected_choice object from the database,
     # then computes the new value of votes, and then saves it back to the database.
