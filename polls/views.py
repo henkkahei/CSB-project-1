@@ -24,7 +24,8 @@ class IndexView(generic.ListView):
         """
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
 
-class DetailView(LoginRequiredMixin, generic.DetailView):
+# class DetailView(LoginRequiredMixin, generic.DetailView):
+class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
 
@@ -38,7 +39,7 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = "polls/results.html"
 
-@login_required()
+# @login_required()
 def vote(request, qid):
     # Small problem here. Function first gets the selected_choice object from the database,
     # then computes the new value of votes, and then saves it back to the database.

@@ -8,8 +8,6 @@
     In short, all POST forms that are targeted at internal URLs
     should use the {% csrf_token %} template tag. -->
 
-<!-- {% if user.is_authenticated %} -->
-
 <form action="{% url 'polls:vote' question.id %}" method="post">
     {% csrf_token %}
     <fieldset>
@@ -22,7 +20,3 @@
     </fieldset>
     <input type="submit" value="Vote">
     </form>
-<!-- {% else %}
-  <p>You have to be logged in to vote</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %} -->
